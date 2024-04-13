@@ -3,6 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
 import re
 import mysql.connector
+from rahasia import hehe
 
 async def hardware(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     f = open("userList.txt", "r")
@@ -27,6 +28,7 @@ async def hardware(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     kode = match.group(1)
     # txtfile = open(f"Hardware/{site}.txt","r")
     # hardwareDetail = txtfile.read()
+    host, user, password, database = hehe.koneksidb()
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",

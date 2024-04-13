@@ -8,8 +8,9 @@ from help import help
 from login import login
 from enkrip import enkrip
 from dekrip import dekrip
-
-app = ApplicationBuilder().token("7193995386:AAEHW6pBcZgI4EBWy2jB8MGsOYEvfsTvVqE").build()
+from rahasia import hehe
+token = hehe.myToken()
+app = ApplicationBuilder().token(token).build()
 
 app.add_handler(CommandHandler("ip", IP))
 app.add_handler(CommandHandler("hardware", hardware))
