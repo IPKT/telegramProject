@@ -30,10 +30,10 @@ async def hardware(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # hardwareDetail = txtfile.read()
     host, user, password, database = hehe.koneksidb()
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database=""
+        host=host,
+        user=user,
+        password=password,
+        database=database
     )
 
     ##cari jenis aloptamanya

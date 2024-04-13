@@ -1,13 +1,14 @@
 import mysql.connector
-
+from rahasia import hehe
 # jenis_aloptama = "intensity"
 kode = "NBDBB"
 
+host, user, password, database = hehe.koneksidb()
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="sanglah151197",
-    database="aloptamadnp"
+    host=host,
+    user=user,
+    password=password,
+    database=database
 )
 
 ##cari jenis aloptamanya
