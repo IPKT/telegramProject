@@ -1,0 +1,9 @@
+== Digi ==
+Merk : Quanterra
+Type : Q330S+
+Tanggal Penggantian : 10-02-2019
+
+== Modem VSAT ==
+Merk : iDirect
+Type : -
+Tahun Penggantian : 10-02-2019

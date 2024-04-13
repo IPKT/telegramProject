@@ -1,0 +1,3 @@
+Modem VSAT : 172.16.3.129
+Seiscomp Box : 172.16.3.130
+Digi : 172.16.3.131
