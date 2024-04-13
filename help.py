@@ -4,6 +4,6 @@ import os
 import re
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    txtfile = open("help.txt","r")
+    txtfile = open("help.txt", "r")
     helper = txtfile.read()
     await update.message.reply_text(helper)

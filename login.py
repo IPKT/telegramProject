@@ -2,10 +2,19 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
 import re
+from rahasia import hehe
 
 async def login(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Mendapatkan pesan dari update
     message_text = update.message.text
+
+    # Cek apakah dia sudah login
+    f = open("userList.txt", "r")
+    list = f.read()
+    f.close()
+    if str(update.message.from_user.id) in list:
+        await update.message.reply_text('Anda sudah login sebelumnya!!')
+        return
 
     # Menggunakan ekspresi reguler untuk menangkap kata kedua setelah kata pertama
     match = re.match(r'/login\s+(\w+)\s+(\w+)', message_text)
@@ -18,6 +27,7 @@ async def login(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Mendapatkan kata kedua setelah kata pertama dari pesan
     user = match.group(1)
     sandi = match.group(2)
+    u , p = hehe.userpass()
     f = open("userList.txt","r")
     list = f.read()
     f.close()
@@ -26,7 +36,7 @@ async def login(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text('Anda sudah pernah login')
     else:
         print("belum ada dalam list user id")
-        if user == "geofisika" and sandi == "sanglah12345":
+        if user == u and sandi == p:
             print("login berhasil")
             user_id = update.message.from_user.id
             username = update.message.from_user.username

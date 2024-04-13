@@ -1,6 +1,3 @@
 Berikut adalah beberapa command yang bisa digunakan
 /login {username} {password}
-/ip {kode site}
 /hardware {kode site}
-/enkrip {teks} {password} {salt}
-/dekrip {teksTerenkripsi} {password} {salt}
