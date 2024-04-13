@@ -33,7 +33,7 @@ async def login(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     f.close()
     if str(update.message.from_user.id) in list:
         print("sudah ada dalam list user id")
-        await update.message.reply_text('Anda sudah pernah login')
+        await update.message.reply_text('Anda sudah pernah login!!')
     else:
         print("belum ada dalam list user id")
         if user == u and sandi == p:
