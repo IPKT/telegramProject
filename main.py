@@ -15,8 +15,8 @@ app.add_handler(CommandHandler("ip", IP))
 app.add_handler(CommandHandler("hardware", hardware))
 app.add_handler(CommandHandler("help", help))
 app.add_handler(CommandHandler("login", login))
-app.add_handler(CommandHandler("enkrip", enkrip))
-app.add_handler(CommandHandler("dekrip", dekrip))
+# app.add_handler(CommandHandler("enkrip", enkrip))
+# app.add_handler(CommandHandler("dekrip", dekrip))
 
 
 app.run_polling()

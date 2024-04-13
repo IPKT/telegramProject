@@ -1,4 +1,5 @@
 from telegram.ext import Updater, CommandHandler, CallbackContext
+from rahasia import hehe
 
 # Fungsi untuk menangani perintah /start
 def start(update, context):
@@ -6,7 +7,7 @@ def start(update, context):
 
 def main():
     # Token bot yang Anda dapatkan dari BotFather
-    TOKEN = "7193995386:AAEHW6pBcZgI4EBWy2jB8MGsOYEvfsTvVqE"
+    TOKEN = hehe.myToken()
 
     # Inisialisasi Updater
     updater = Updater(TOKEN, use_context=True)

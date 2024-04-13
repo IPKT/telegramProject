@@ -2,13 +2,14 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
 import re
+import mysql.connector
 
 async def IP(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     f = open("userList.txt", "r")
     list = f.read()
     f.close()
     if str(update.message.from_user.id) not in list:
-        await update.message.reply_text('Silahkan Login terlebi dahulu!!')
+        await update.message.reply_text('Silahkan Login terlebih dahulu!!')
         return
     # Mendapatkan pesan dari update
     message_text = update.message.text
@@ -25,6 +26,7 @@ async def IP(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     site = match.group(1)
     txtfile = open(f"IP/{site}.txt","r")
     ipadd = txtfile.read()
+
 
 
     # Balas pesan dengan nama yang diberikan
