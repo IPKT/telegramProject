@@ -52,5 +52,7 @@ async def login(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             f.close()
             balasan = f"Login Berhasil \nSelamat datang {fullName} \nIni adalah bot yang membantu anda memberikan informasi Aloptama Stasiun Geofisika Denpasar"
             await update.message.reply_text(balasan)
+        else:
+            await update.message.reply_text("User dan password Anda salah, silahkan hubungi Admin")
         # Balas pesan dengan nama yang diberikan
     #await update.message.reply_text(hardwareDetail)

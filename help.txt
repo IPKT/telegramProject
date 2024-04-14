@@ -1,3 +1,4 @@
 Berikut adalah beberapa command yang bisa digunakan
 /login {username} {password}
 /hardware {kode site}
+/ip {kode site}
