@@ -2,6 +2,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
 import re
+from info import info
 from ip import ip
 from hardware import hardware
 from help import help
@@ -20,6 +21,7 @@ app.add_handler(CommandHandler("login", login))
 app.add_handler(CommandHandler("start", start))
 # app.add_handler(CommandHandler("enkrip", enkrip))
 # app.add_handler(CommandHandler("dekrip", dekrip))
+app.add_handler(CommandHandler("info", info))
 
 
 app.run_polling()
