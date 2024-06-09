@@ -12,6 +12,7 @@ from goer import goer
 from enkrip import enkrip
 from dekrip import dekrip
 from rahasia import hehe
+from rekapKunjungan import rekapKunjungan
 token = hehe.myToken()
 app = ApplicationBuilder().token(token).build()
 
@@ -24,6 +25,7 @@ app.add_handler(CommandHandler("start", start))
 # app.add_handler(CommandHandler("dekrip", dekrip))
 app.add_handler(CommandHandler("info", info))
 app.add_handler(CommandHandler("goer", goer))
+app.add_handler(CommandHandler("rekapKunjungan", rekapKunjungan))
 
 
 app.run_polling()
