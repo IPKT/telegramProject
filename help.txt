@@ -3,3 +3,4 @@ Berikut adalah beberapa command yang bisa digunakan
 /hardware {kode site}
 /ip {kode site}
 /info {kode site}
+/rekapKunjungan {jenisAloptama} || Contoh : /rekapKunjungan seismo
