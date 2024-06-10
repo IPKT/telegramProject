@@ -1,7 +1,7 @@
 def koneksidb ():
     host = "localhost"
     user = "root"
-    password = "sanglah151197"
+    password = ""
     database = "aloptamadnp"
     return host,user,password,database
 
