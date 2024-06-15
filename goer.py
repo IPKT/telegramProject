@@ -66,14 +66,13 @@ async def goer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 Update Penjualan Tiket Musik PelipurLara
 {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 Jumlah tiket terjual {hihi.text} 
-Smangatt yaaa, jangan ngeselin"""
+Smangatt yaaa, jaga kesehatan 😊"""
     else:
         pesan = f"""Halloo !!!
 Update Penjualan Tiket Musik PelipurLara
 {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 Jumlah tiket terjual {hihi.text} 
 Smangatt Team!!!"""
-
 
 
 
