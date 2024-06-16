@@ -108,7 +108,7 @@ Rekomendasi :
 ❗️Catatan Site
 {infoSite[4]}
 
-Semoga membantu yya 😁
+Semoga membantu 😁
 ```"""
     print(kerusakan)
     # cari file pdf laporan
