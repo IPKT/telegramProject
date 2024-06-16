@@ -1,5 +1,5 @@
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes , CallbackContext , MessageHandler
 import os
 import re
 from info import info
@@ -13,6 +13,12 @@ from enkrip import enkrip
 from dekrip import dekrip
 from rahasia import hehe
 from rekapKunjungan import rekapKunjungan
+# from catatanMonot import catatanMonot
+# from catatanMonot2 import catatanMonot2
+from pending_notes import pending_notes  # Import variabel pending_notes
+from catatan import capture_note
+
+
 token = hehe.myToken()
 app = ApplicationBuilder().token(token).build()
 
@@ -26,6 +32,10 @@ app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("info", info))
 app.add_handler(CommandHandler("goer", goer))
 app.add_handler(CommandHandler("rekapKunjungan", rekapKunjungan))
+# app.add_handler(CommandHandler("catatanMonot", catatanMonot))
+# app.add_handler(CommandHandler("catatanMonot2", catatanMonot2))
+app.add_handler(CommandHandler("catatan", capture_note))
+
 
 
 app.run_polling()
