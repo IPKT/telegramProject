@@ -91,21 +91,26 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     myresult = mycursor.fetchone()
     rekomendasi = myresult[0]
 
-    pesan = f"""Detail info Site {kode}
+    pesan = f"""```
+Informasi Site {kode} 🇮🇩
 
-Lokasi : {infoSite[0]}
-PIC : {infoSite[1]}
+Lokasi      : {infoSite[0]}
+PIC         : {infoSite[1]}
 Jabatan PIC : {infoSite[2]}
-Kontak PIC : {infoSite[3]}
+Kontak PIC  : {infoSite[3]}
 
-Kunjungan Terakhir
-Tanggal : {tanggal}
-Kerusakan : {kerusakan}
-Rekomendasi : {rekomendasi}
+🕐Kunjungan Terakhir
+Tanggal     : {tanggal}
+Kerusakan   : ❌{kerusakan}❌
+Rekomendasi : 
+{rekomendasi}
 
-Catatan Site
+❗️Catatan Site
 {infoSite[4]}
-"""
+
+Semoga membantu yya 😁
+```"""
+    print(kerusakan)
     # cari file pdf laporan
     mycursor = mydb.cursor()
     query = "SELECT laporan FROM tbl_kunjungan_%s WHERE id_%s = %s ORDER BY tanggal DESC LIMIT 1" % (
@@ -118,7 +123,7 @@ Catatan Site
 
 
     # Balas pesan ke user
-    await update.message.reply_text(pesan)
+    await update.message.reply_text(pesan,parse_mode="Markdown")
 
     # Kirim file PDF
     await context.bot.send_document(chat_id=chat_id, document=open(pdf_path, 'rb'))

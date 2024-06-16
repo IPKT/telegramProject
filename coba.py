@@ -22,6 +22,16 @@ for a in myresult:
     kode.append(a)
 
 print(kode)
+jenis_aloptama = 'intensity'
+tabel = 'tbl_kunjungan_' + jenis_aloptama
+mycursor = mydb.cursor()
+query = "SELECT tanggal FROM %s ORDER BY tanggal DESC LIMIT 1" % (tabel)
+mycursor.execute(query)
+myresult = mycursor.fetchone()
+print(myresult)
+update = str(myresult[0])
+print(update)
+# print(update)
 no = 1
 laporan = ""
 for a in kode:
@@ -34,7 +44,7 @@ for a in kode:
     laporan = laporan + b
     no = no+1
 
-print(laporan)
+# print(laporan)
 
 
 # SELECT * FROM `tbl_kunjungan_intensity` WHERE `tanggal` >= 2024-01-01 AND `id_intensity` = 30

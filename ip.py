@@ -68,5 +68,6 @@ async def ip(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 {myresult[0]}
     """
 
+
     # Balas pesan ke user
     await update.message.reply_text(pesan)

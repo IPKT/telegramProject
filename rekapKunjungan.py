@@ -51,15 +51,26 @@ async def rekapKunjungan(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         kode.append(a)
 
     # print(kode)
+    tabel = 'tbl_kunjungan_' + jenis_aloptama
+    mycursor = mydb.cursor()
+    query = "SELECT tanggal FROM %s ORDER BY tanggal DESC LIMIT 1" % (tabel)
+    mycursor.execute(query)
+    myresult = mycursor.fetchone()
+    # print(myresult)
+    waktuUpdate = str(myresult[0])
+    print(waktuUpdate)
+    # mycursor.close()
+
     no = 1
-    laporan = ""
+    laporan = f"List Jumlah Kunjungan tiap site tahun 2024 \nUpdated at {waktuUpdate}\n\n"
+    # laporan=""
     for a in kode:
-        tabel = 'tbl_kunjungan_intensity'
+        tabel = 'tbl_kunjungan_'+jenis_aloptama
         mycursor = mydb.cursor()
-        query = "SELECT COUNT(*) FROM %s WHERE tanggal >= '2024-01-01' AND id_intensity = %s" % (tabel, a[1])
+        query = "SELECT COUNT(*) FROM %s WHERE tanggal >= '2024-01-01' AND id_%s = %s" % (tabel,jenis_aloptama,a[1])
         mycursor.execute(query)
         myresult = mycursor.fetchone()
-        b = f"{no}.{a[0]} {myresult[0]} \n"
+        b = f"{no}. {a[0]} {myresult[0]} \n"
         laporan = laporan + b
         no = no + 1
     # Balas pesan ke user

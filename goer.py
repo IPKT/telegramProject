@@ -60,12 +60,21 @@ async def goer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # haha = driver.find_element(By.CLASS_NAME,"eBBb0h").text
     hihi = driver.find_element(By.XPATH,
                                "/html/body/main/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[3]/div/div[2]/div[2]/div[1]")
-    print(hihi.text)
-    pesan = f"""Halloo !!
-    Update Penjualan Tiket Musik PelipurLara
-    {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-    Jumlah tiket terjual {hihi.text} 
-    Smangatt Team!!!"""
+    # print(hihi.text)
+    if update.message.from_user.id == 5121796183:
+        pesan = f"""Halloo Ibu Koor cantik :D
+Update Penjualan Tiket Musik PelipurLara
+{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+Jumlah tiket terjual {hihi.text} 
+Smangatt yaaa, jaga kesehatan 😊"""
+    else:
+        pesan = f"""Halloo !!!
+Update Penjualan Tiket Musik PelipurLara
+{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+Jumlah tiket terjual {hihi.text} 
+Smangatt Team!!!"""
+
+
 
 
     # Balas pesan ke user
