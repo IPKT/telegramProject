@@ -23,7 +23,7 @@ async def ip(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # Jika tidak ada kecocokan, kembalikan pesan default
     if not match:
-        await update.message.reply_text('Mohon berikan nama SITE setelah perintah /ip.')
+        await update.message.reply_text('Mohon berikan nama SITE setelah perintah /ip. Contoh: /ip NKBI ')
         return
 
     # Mendapatkan kata kedua setelah kata pertama dari pesan
