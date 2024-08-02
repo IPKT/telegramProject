@@ -23,7 +23,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # Jika tidak ada kecocokan, kembalikan pesan default
     if not match:
-        await update.message.reply_text('Mohon berikan nama SITE setelah perintah /info.')
+        await update.message.reply_text('Mohon berikan nama SITE setelah perintah /info. Contoh /info NKBI')
         return
 
     # Mendapatkan kata kedua setelah kata pertama dari pesan

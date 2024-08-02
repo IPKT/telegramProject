@@ -34,7 +34,7 @@ app.add_handler(CommandHandler("goer", goer))
 app.add_handler(CommandHandler("rekapKunjungan", rekapKunjungan))
 # app.add_handler(CommandHandler("catatanMonot", catatanMonot))
 # app.add_handler(CommandHandler("catatanMonot2", catatanMonot2))
-app.add_handler(CommandHandler("catatan", capture_note))
+# app.add_handler(CommandHandler("catatan", capture_note))
 
 
 

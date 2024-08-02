@@ -23,7 +23,7 @@ async def hardware(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # Jika tidak ada kecocokan, kembalikan pesan default
     if not match:
-        await update.message.reply_text('Mohon berikan nama SITE setelah perintah /hardware.')
+        await update.message.reply_text('Mohon berikan nama SITE setelah perintah /hardware. Contoh /hardware NBI01')
         return
 
     # Mendapatkan kata kedua setelah kata pertama dari pesan
