@@ -1,8 +1,8 @@
-Hasil ping ke NGI03
+Hasil ping ke NGI02
 
-Modem : 172.19.27.89
+Modem : 172.19.27.81
 
-Cube : 172.19.27.90
+Cube : 172.19.27.82
 
-Sensor :172.19.27.91
+Sensor :172.19.27.83
 

@@ -106,33 +106,27 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     success_count = 0
     failure_count = 0
-    listIP_RTO = []
 
     # ambil ip
     for ip in listIP:
         match = re.search(pattern, ip)
+        tanpa_ip = re.sub(pattern, "", "".join(ip))
+        hapus = str.maketrans('', '', ':')
+        gabung = tanpa_ip.translate(hapus)
+        clean_text = gabung.replace('\n', ' ')
         if match:
             ip_address = match.group(0).strip()
             success, output = ping(ip_address)
             if success:
                 (f"Ping success = {ip}")
-                tanpa_ip = re.sub(pattern, "","".join(ip))
-                hapus = str.maketrans('', '', ':')
-                gabung = tanpa_ip.translate(hapus)
-                clean_text = gabung.replace('\n', ' ')
                 hasil1=(f"{clean_text} : {output}")
                 print(hasil1)
                 await update.message.reply_text(hasil1)
                 success_count += 1
             else:
                 (f"Ping failed = {ip}")
-                tanpa_ip = re.sub(pattern, "", "".join(ip))
-                hapus = str.maketrans('', '', ':')
-                gabung = tanpa_ip.translate(hapus)
-                clean_text = gabung.replace('\n', ' ')
                 hasil2=(f"{clean_text} : {output}")
                 print(hasil2)
                 await update.message.reply_text(hasil2)
                 failure_count += 1
-                listIP_RTO.append(ip)
 
