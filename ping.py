@@ -3,6 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
 import re
 import subprocess
+import platform
 import mysql.connector
 from rahasia import hehe
 
@@ -13,6 +14,8 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if str(update.message.from_user.id) not in list:
         await update.message.reply_text('Silahkan Login terlebi dahulu!!')
         return
+    #tunggu="Tunggu sebentar ya...."
+    #await update.message.reply_text(tunggu)
 
     # Mendapatkan pesan dari update
     message_text = update.message.text
@@ -71,20 +74,33 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     print(pesan)
     with open("ping_results.txt", "w") as file:
         file.write(pesan)
-
+    lines_to_remove={8,9,10,11}
     with open("ping_results.txt","r") as file:
         listIP = file.readlines()
+    filtered_lines = [line for index, line in enumerate(listIP) if index not in lines_to_remove]
+
+    with open("ping_results.txt", "w") as file:
+        file.writelines(filtered_lines)
+    with open("ping_results.txt","r") as file:
+        listIP = file.readlines()
+
     pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
 
     # ambil ip
     def ping(host):
+        # Menyesuaikan perintah ping berdasarkan sistem operasi
+        if platform.system() == "Windows":
+            command = ['ping', '-n', '1', host]
+        else:
+            command = ['ping', '-c', '1', host]
+
         result = subprocess.run(['ping', host], capture_output=True, text=True)
 
         if result.returncode == 0:
             if "time" in result.stdout:
                 return True, "OK"
             else:
-                return False, "RTO"
+                return False, "Tidak OK"
         else:
             return False, result.stderr
 
@@ -100,27 +116,23 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             success, output = ping(ip_address)
             if success:
                 (f"Ping success = {ip}")
-                (output)
+                tanpa_ip = re.sub(pattern, "","".join(ip))
+                hapus = str.maketrans('', '', ':')
+                gabung = tanpa_ip.translate(hapus)
+                clean_text = gabung.replace('\n', ' ')
+                hasil1=(f"{clean_text} : {output}")
+                print(hasil1)
+                await update.message.reply_text(hasil1)
                 success_count += 1
             else:
                 (f"Ping failed = {ip}")
-                (output)
+                tanpa_ip = re.sub(pattern, "", "".join(ip))
+                hapus = str.maketrans('', '', ':')
+                gabung = tanpa_ip.translate(hapus)
+                clean_text = gabung.replace('\n', ' ')
+                hasil2=(f"{clean_text} : {output}")
+                print(hasil2)
+                await update.message.reply_text(hasil2)
                 failure_count += 1
                 listIP_RTO.append(ip)
 
-    if listIP_RTO:
-        join_tanpa_ip = ",".join(listIP_RTO)
-        tanpa_ip = re.sub(pattern, "", join_tanpa_ip).strip()
-        (f"{tanpa_ip}")
-    else:
-        ("tidak ada")
-
-    hasil1 = (f"Reply = {success_count}")
-    hasil2 = (f"\nTidak Reply = {failure_count}")
-    hasil3 = ("\nDaftar ip yang tidak Reply =")
-    hasil4=(f"{tanpa_ip}")
-    combined = hasil1 + hasil2 + hasil3 + hasil4
-    print(combined)
-
-    # Mengirim hasil kepada pengguna
-    await update.message.reply_text(combined)
