@@ -108,20 +108,24 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     failure_count = 0
 
     # ambil ip
+    pesanKirim = ""
     for ip in listIP:
         match = re.search(pattern, ip)
         tanpa_ip = re.sub(pattern, "", "".join(ip))
         hapus = str.maketrans('', '', ':')
         gabung = tanpa_ip.translate(hapus)
         clean_text = gabung.replace('\n', ' ')
+
         if match:
             ip_address = match.group(0).strip()
             success, output = ping(ip_address)
             if success:
                 (f"Ping success = {ip}")
+
                 hasil1=(f"{clean_text} : {output}")
+                pesanKirim = pesanKirim +"\n"+ hasil1
                 print(hasil1)
-                await update.message.reply_text(hasil1)
+                # await update.message.reply_text(pesanKirim)
                 success_count += 1
             else:
                 (f"Ping failed = {ip}")
@@ -130,3 +134,4 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 await update.message.reply_text(hasil2)
                 failure_count += 1
 
+    await update.message.reply_text(pesanKirim)
