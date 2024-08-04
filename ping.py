@@ -12,10 +12,10 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     list = f.read()
     f.close()
     if str(update.message.from_user.id) not in list:
-        await update.message.reply_text('Silahkan Login terlebi dahulu!!')
+        await update.message.reply_text('Silahkan Login terlebih dahulu!!')
         return
-    #tunggu="Tunggu sebentar ya...."
-    #await update.message.reply_text(tunggu)
+    tunggu="Tunggu sebentar ya...."
+    await update.message.reply_text(tunggu)
 
     # Mendapatkan pesan dari update
     message_text = update.message.text

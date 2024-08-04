@@ -1,8 +1,8 @@
-Hasil ping ke NGI02
+Hasil ping ke NKA02
 
-Modem : 172.19.27.81
+Modem : 172.19.28.41
 
-Cube : 172.19.27.82
+Cube : 172.19.28.42
 
-Sensor :172.19.27.83
+Sensor :172.19.28.43
 
