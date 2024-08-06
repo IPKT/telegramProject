@@ -1,8 +1,8 @@
-Hasil ping ke NKA02
+Hasil ping ke NKA03
 
-Modem : 172.19.28.41
+Modem : 172.19.28.49
 
-Cube : 172.19.28.42
+Cube : 172.19.28.50
 
-Sensor :172.19.28.43
+Sensor :172.19.28.51
 

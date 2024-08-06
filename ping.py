@@ -1,5 +1,6 @@
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Updater, CallbackContext
+import emoji
 import os
 import re
 import subprocess
@@ -7,14 +8,17 @@ import platform
 import mysql.connector
 from rahasia import hehe
 
-async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+emojiTangan= "\U0001F64F"
+emojiSenyum= "\U0001F60A"
+
+async def ping(update: Update, context: CallbackContext):
     f = open("userList.txt", "r")
     list = f.read()
     f.close()
     if str(update.message.from_user.id) not in list:
         await update.message.reply_text('Silahkan Login terlebih dahulu!!')
         return
-    tunggu="Tunggu sebentar ya...."
+    tunggu=f"Harap tunggu.... {emojiTangan}"
     await update.message.reply_text(tunggu)
 
     # Mendapatkan pesan dari update
@@ -109,6 +113,7 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # ambil ip
     pesanKirim = ""
+    pesanKirim2= ""
     for ip in listIP:
         match = re.search(pattern, ip)
         tanpa_ip = re.sub(pattern, "", "".join(ip))
@@ -122,16 +127,19 @@ async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             if success:
                 (f"Ping success = {ip}")
 
-                hasil1=(f"{clean_text} : {output}")
+                hasil1=(f"{clean_text}: {output}")
                 pesanKirim = pesanKirim +"\n"+ hasil1
-                print(hasil1)
+                #print(hasil1)
                 # await update.message.reply_text(pesanKirim)
                 success_count += 1
             else:
                 (f"Ping failed = {ip}")
-                hasil2=(f"{clean_text} : {output}")
-                print(hasil2)
-                await update.message.reply_text(hasil2)
+                hasil2=(f"{clean_text}: {output}")
+                pesanKirim2 = pesanKirim2 + "\n" + hasil2
+                #print(hasil2)
+                #await update.message.reply_text(hasil2)
                 failure_count += 1
-
-    await update.message.reply_text(pesanKirim)
+    pesanGabungan=f"Hasil tes ping Site {kode} :\n{pesanKirim}{pesanKirim2}\n\n Terimakasih....{emojiSenyum}"
+    print(pesanGabungan)
+    await update.message.reply_text(pesanGabungan)
+    #await update.message.reply_text(pesanKirim2)
