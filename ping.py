@@ -18,8 +18,6 @@ async def ping(update: Update, context: CallbackContext):
     if str(update.message.from_user.id) not in list:
         await update.message.reply_text('Silahkan Login terlebih dahulu!!')
         return
-    tunggu=f"Harap tunggu.... {emojiTangan}"
-    await update.message.reply_text(tunggu)
 
     # Mendapatkan pesan dari update
     message_text = update.message.text
@@ -50,96 +48,107 @@ async def ping(update: Update, context: CallbackContext):
     jenis_aloptama = ""
     tabels = ['tbl_seismo', 'tbl_acc_noncolo', 'tbl_intensity', 'tbl_int_reis']
     for tabel in tabels:
+        if tabel == "tbl_intensity":
+            mycursor = mydb.cursor()
+            query = "SELECT * FROM %s WHERE kode = '%s' " % (tabel, kode)
+            mycursor.execute(query)
+            myresult = mycursor.fetchone()
+            if myresult == None:
+                continue
+            else:
+                tunggu = f"Harap tunggu.... {emojiTangan}"
+                await update.message.reply_text(tunggu)
+                jenis_aloptama = tabel.split("_")[1]
+
+
+    #Hanya Intensity Realshake
+    try:
+        # Cari id aloptamanya
         mycursor = mydb.cursor()
-        query = "SELECT * FROM %s WHERE kode = '%s' " % (tabel, kode)
+        query = "SELECT id FROM tbl_%s WHERE kode = '%s' " % (jenis_aloptama, kode)
         mycursor.execute(query)
         myresult = mycursor.fetchone()
-        if myresult == None:
-            continue
-        else:
-            jenis_aloptama = tabel.split("_")[1]
+        id = int(myresult[0])
 
-    # Cari id aloptamanya
-    mycursor = mydb.cursor()
-    query = "SELECT id FROM tbl_%s WHERE kode = '%s' " % (jenis_aloptama, kode)
-    mycursor.execute(query)
-    myresult = mycursor.fetchone()
-    id = int(myresult[0])
-
-    # ambil list ip
-    mycursor = mydb.cursor()
-    query = "SELECT ip FROM tbl_%s WHERE id = %s " % (jenis_aloptama, id)
-    mycursor.execute(query)
-    myresult = mycursor.fetchone()
-    pesan = f"""Hasil ping ke {kode}
-
+        # ambil list ip
+        mycursor = mydb.cursor()
+        query = "SELECT ip FROM tbl_%s WHERE id = %s " % (jenis_aloptama, id)
+        mycursor.execute(query)
+        myresult = mycursor.fetchone()
+        pesan = f"""Hasil ping ke {kode}
+    
 {myresult[0]}
-    """
-    print(pesan)
-    with open("ping_results.txt", "w") as file:
-        file.write(pesan)
-    lines_to_remove={8,9,10,11}
-    with open("ping_results.txt","r") as file:
-        listIP = file.readlines()
-    filtered_lines = [line for index, line in enumerate(listIP) if index not in lines_to_remove]
+        """
+        print(pesan)
+        with open("ping_results.txt", "w") as file:
+            file.write(pesan)
+        with open("ping_results.txt","r") as file:
+                listIP = file.readlines()
+        lines_to_remove = {8, 9, 10, 11}
+        #content = re.sub(r"\t", "", listIP)
+        filtered_lines = [line for index, line in enumerate(listIP) if index not in lines_to_remove]
+        with open("ping_results.txt", "w") as file:
+                file.writelines(filtered_lines)
+        with open("ping_results.txt","r") as file:
+            listIP = file.readlines()
 
-    with open("ping_results.txt", "w") as file:
-        file.writelines(filtered_lines)
-    with open("ping_results.txt","r") as file:
-        listIP = file.readlines()
+        pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
 
-    pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
-
-    # ambil ip
-    def ping(host):
-        # Menyesuaikan perintah ping berdasarkan sistem operasi
-        if platform.system() == "Windows":
-            command = ['ping', '-n', '1', host]
-        else:
-            command = ['ping', '-c', '1', host]
-
-        result = subprocess.run(['ping', host], capture_output=True, text=True)
-
-        if result.returncode == 0:
-            if "time" in result.stdout:
-                return True, "OK"
+        # ambil ip
+        def ping(host):
+            # Menyesuaikan perintah ping berdasarkan sistem operasi
+            if platform.system() == "Windows":
+                command = ['ping', '-n', '1', host]
             else:
-                return False, "Tidak OK"
-        else:
-            return False, result.stderr
+                command = ['ping', '-c', '1', host]
 
-    success_count = 0
-    failure_count = 0
+            result = subprocess.run(['ping', host], capture_output=True, text=True)
 
-    # ambil ip
-    pesanKirim = ""
-    pesanKirim2= ""
-    for ip in listIP:
-        match = re.search(pattern, ip)
-        tanpa_ip = re.sub(pattern, "", "".join(ip))
-        hapus = str.maketrans('', '', ':')
-        gabung = tanpa_ip.translate(hapus)
-        clean_text = gabung.replace('\n', ' ')
-
-        if match:
-            ip_address = match.group(0).strip()
-            success, output = ping(ip_address)
-            if success:
-                (f"Ping success = {ip}")
-
-                hasil1=(f"{clean_text}: {output}")
-                pesanKirim = pesanKirim +"\n"+ hasil1
-                #print(hasil1)
-                # await update.message.reply_text(pesanKirim)
-                success_count += 1
+            if result.returncode == 0:
+                if "time" in result.stdout:
+                    return True, "OK"
+                else:
+                    return False, "Tidak OK"
             else:
-                (f"Ping failed = {ip}")
-                hasil2=(f"{clean_text}: {output}")
-                pesanKirim2 = pesanKirim2 + "\n" + hasil2
-                #print(hasil2)
-                #await update.message.reply_text(hasil2)
-                failure_count += 1
-    pesanGabungan=f"Hasil tes ping Site {kode} :\n{pesanKirim}{pesanKirim2}\n\n Terimakasih....{emojiSenyum}"
-    print(pesanGabungan)
-    await update.message.reply_text(pesanGabungan)
-    #await update.message.reply_text(pesanKirim2)
+                return False, result.stderr
+
+        success_count = 0
+        failure_count = 0
+
+        # ambil ip
+        pesanKirim = ""
+        pesanKirim2= ""
+        for ip in listIP:
+            match = re.search(pattern, ip)
+            tanpa_ip = re.sub(pattern, "", "".join(ip))
+            hapus = str.maketrans('', '', ':')
+            gabung = tanpa_ip.translate(hapus)
+            clean_text = gabung.replace('\n', ' ')
+
+            if match:
+                ip_address = match.group(0).strip()
+                success, output = ping(ip_address)
+                if success:
+                    (f"Ping success = {ip}")
+
+                    hasil1=(f"{clean_text}: {output}")
+                    pesanKirim = pesanKirim +"\n"+ hasil1
+                    #print(hasil1)
+                    # await update.message.reply_text(pesanKirim)
+                    success_count += 1
+                else:
+                    (f"Ping failed = {ip}")
+                    hasil2=(f"{clean_text}: {output}")
+                    pesanKirim2 = pesanKirim2 + "\n" + hasil2
+                    #print(hasil2)
+                    #await update.message.reply_text(hasil2)
+                    failure_count += 1
+        pesanGabungan=f"Hasil tes ping Site {kode} :\n{pesanKirim}{pesanKirim2}\n\n Terimakasih....{emojiSenyum}"
+        print(pesanGabungan)
+        await update.message.reply_text(pesanGabungan)
+        #await update.message.reply_text(pesanKirim2)
+
+    except:
+        takada = f"Mohon Maaf, hanya bisa melakukan ping ke Intensitymeter Realshake.... {emojiTangan}"
+        await update.message.reply_text(takada)
+        print(takada)

@@ -9,6 +9,9 @@ from help import help
 from login import login
 from start import start
 from ping import ping
+from monitoring import monitoring
+from monitoringwa import monitoringwa
+
 # from goer import goer
 from enkrip import enkrip
 from dekrip import dekrip
@@ -29,6 +32,8 @@ app.add_handler(CommandHandler("help", help))
 app.add_handler(CommandHandler("login", login))
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("ping", ping))
+app.add_handler(CommandHandler("monitoring", monitoring))
+app.add_handler(CommandHandler("monitoringwa", monitoringwa))
 # app.add_handler(CommandHandler("enkrip", enkrip))
 # app.add_handler(CommandHandler("dekrip", dekrip))
 app.add_handler(CommandHandler("info", info))

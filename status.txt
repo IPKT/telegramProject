@@ -1,0 +1,39 @@
+Izin Pimpinan, Izin melaporkan status Aloptama Stageof Denpasar
+2024-08-10 17:35:42
+
+STATUS SEISMOMETER
+Jumlah Sensor : 13
+ON : 13
+OFF : 0 
+Sensor OFF : []
+
+STATUS ACCELEROMETER
+Jumlah Sensor : 9
+ON : 9
+OFF : 0 
+Sensor OFF : []
+
+STATUS ACCELEROMETER NON COLOCATED
+Jumlah Sensor : 6
+ON : 6
+OFF : 0 
+Sensor OFF : []
+
+STATUS INTENSITYMETER
+Jumlah Sensor : 53
+ON : 52
+OFF : 1 
+Sensor OFF : ['NKA01 120.5 h']
+
+STATUS INTENSITYMETER REIS
+Jumlah Sensor : 9
+ON : 9
+OFF : 0 
+Sensor OFF : []
+
+STATUS WRS NG
+Modem Up : 10
+Modem Down : 0
+Display Up : 10
+Display Down : 0 
+    

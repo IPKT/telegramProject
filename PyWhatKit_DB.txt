@@ -1,0 +1,10 @@
+Date: 6/8/2024
+Time: 20:14
+Group ID: L8hb3ciK8prAyXsoR0WX4S
+Message: Izin Pimpinan, Izin melaporkan status Aloptama Stageof Denpasar2024-08-06 20:14:26STATUS SEISMOMETERJumlah Sensor : 13ON : 13OFF : 0 Sensor OFF : []STATUS ACCELEROMETERJumlah Sensor : 9ON : 9OFF : 0 Sensor OFF : []STATUS ACCELEROMETER NON COLOCATEDJumlah Sensor : 6ON : 6OFF : 0 Sensor OFF : []STATUS INTENSITYMETERJumlah Sensor : 53ON : 52OFF : 1 Sensor OFF : ['NKA01 27.2 h']STATUS INTENSITYMETER REISJumlah Sensor : 9ON : 9OFF : 0 Sensor OFF : []STATUS WRS NGModem Up : 10Modem Down : 0Display Up : 10Display Down : 0
+--------------------
+Date: 10/8/2024
+Time: 17:32
+Group ID: L8hb3ciK8prAyXsoR0WX4S
+Message: Izin Pimpinan, Izin melaporkan status Aloptama Stageof Denpasar2024-08-10 17:32:56STATUS SEISMOMETERJumlah Sensor : 13ON : 13OFF : 0 Sensor OFF : []STATUS ACCELEROMETERJumlah Sensor : 9ON : 9OFF : 0 Sensor OFF : []STATUS ACCELEROMETER NON COLOCATEDJumlah Sensor : 6ON : 6OFF : 0 Sensor OFF : []STATUS INTENSITYMETERJumlah Sensor : 53ON : 52OFF : 1 Sensor OFF : ['NKA01 120.5 h']STATUS INTENSITYMETER REISJumlah Sensor : 9ON : 9OFF : 0 Sensor OFF : []STATUS WRS NGModem Up : 10Modem Down : 0Display Up : 10Display Down : 0
+--------------------
